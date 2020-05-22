@@ -1,0 +1,38 @@
+* {
+  box-sizing: border-box;
+}
+.wrapper{
+  width:100vw;
+  height:100vh;
+  background-color:red;
+  .header{
+    width:100%;
+    height:10%;
+    position: fixed;
+    background-color:gray;
+    display: flex;
+    &__left{
+      width: 70%;
+      display:flex;
+      &-home{
+        margin:0px 30px 0px 30px;
+      }
+      &-search{
+  
+      }
+    }
+    &__right{
+      width:30%;
+      &-mypage{
+      
+      }
+    }
+  }
+  .list{
+    width:90%;
+    height:100%;
+    margin: 25px, 0px, 25px, 0px;
+    background-color:white;
+    margin:0 auto;
+  }
+}
