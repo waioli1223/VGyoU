@@ -25,53 +25,105 @@ Things you may want to cover:
 
 # VGyoU DB設計
 
+## usersテーブル
 |Column|Type|Options|
 |------|----|-------|
-|email|string|null: false|
+|family_name|string|null: false|
+|middle_name|string||
+|first_name|string|null: false|
+|family_name_original|string|null: false|
+|middle_name_original|string||
+|first_name_original|string|null: false|
+|nickname|string|null: false|
+|e-mail|string|null: false, unique: true|
 |password|string|null: false|
-|username|string|null: false|
-|facebook|string||
-|instagram|string||
-|twitter|string||
+|birthday|date|null: false|
 ### Association
-- has_many :posts
-- has_many :comments
+has_many :posts
+has_many :likes
+has_many :comments
+
 
 ## postsテーブル
 |Column|Type|Options|
 |------|----|-------|
-|title|text|null: false|
-|text|text|null: false|
-|user_id|references|null: false, foreign_key: true|
+|title|string|null: false|
+|duration|integer|null: false| 
+|history|text||
+|discription|text||
+|user_id|integer|dependent: :destroy|
 ### Association
-- belongs_to :user
-- has_many :comments
-- has_many :posts_tags
-- has_many  :tags,  through:  :posts_tags
+belongs_to :user
+has_many :images
+has_many :comments
+has_many :likes
+has_many :tags, through: :posts_tags
+has_many :posts_tags
+has_many :categories, through: :posts_tags
+has_many :categories_posts
 
-## tagsテーブル
+
+## imagesテーブル
 |Column|Type|Options|
 |------|----|-------|
-|text|text|null: false|
+|post_id|integer|null: false, dependent: :destroy|
 ### Association
-- has_many :posts_tags
-- has_many  :posts,  through:  :posts_tags
+belongs_to :post
 
-## posts_tagsテーブル
-|Column|Type|Options|
-|------|----|-------|
-|post_id|references|null: false, foreign_key: true|
-|tag_id|references|null: false, foreign_key: true|
-### Association
-- belongs_to :post
-- belongs_to :tag
 
 ## commentsテーブル
 |Column|Type|Options|
 |------|----|-------|
-|text|text|null: false|
-|user_id|references|null: false, foreign_key: true|
-|post_id|references|null: false, foreign_key: true|
+|comment|text|null: false|
+|user_id|integer|null: false, foreign_key: true, independent: :destroy|
 ### Association
-- belongs_to :post
-- belongs_to :user
+belongs_to :user
+belongs_to :post
+
+
+## likesテーブル
+|Column|Type|Options|
+|------|----|-------|
+|user_id|integer|null: false|
+|post_id|integer|null: false, independent: :destroy|
+### Association
+belongs_to :user
+belongs_to :post
+
+
+## tagsテーブル
+|Column|Type|Options|
+|------|----|-------|
+|name|string||
+### Association
+has_many :posts_tags
+has_many  :posts,  through:  :posts_tags
+
+## posts_tagsテーブル
+|Column|Type|Options|
+|------|----|-------|
+|post_id|integer|null: false, foreign_key: true|
+|tag_id|integer|null: false, foreign_key: true|
+### Association
+belongs_to :post
+belongs_to :tag
+
+
+## categoriesテーブル
+|Column|Type|Options|
+|------|----|-------|
+|name|string|null: false|
+|ancestry|string|null: false|
+### Association
+has_many :posts_categories
+has_many :posts, through: :photos_tags
+
+
+## posts_categoriesテーブル
+|Column|Type|Options|
+|------|----|-------|
+|post_id|integer|null: false, foreign_key: true|
+|categiry_id|integer|null: false, foreign_key: true|
+### Association
+belongs_to :post
+belongs_to :category
