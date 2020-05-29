@@ -31,7 +31,7 @@ Things you may want to cover:
 |family_name|string|null: false|
 |middle_name|string||
 |first_name|string|null: false|
-|family_name_original|string|null: false|
+|family_name_original|string|null: false|
 |middle_name_original|string||
 |first_name_original|string|null: false|
 |nickname|string|null: false|
@@ -49,7 +49,6 @@ has_many :comments
 |------|----|-------|
 |title|string|null: false|
 |duration|integer|null: false| 
-|history|text||
 |discription|text||
 |user_id|integer|dependent: :destroy|
 ### Association

@@ -1,9 +1,10 @@
 class CreatePosts < ActiveRecord::Migration[5.2]
   def change
     create_table :posts do |t|
-      t.text :title,      null: false
-      t.text :text,       null: false
-      t.integer :user_id, null: false, foreign_key: true
+      t.string    :title,        null: false
+      t.integer   :duration      null: false
+      t.text      :discription,  null: false
+      t.integer   :user_id,      null: false, foreign_key: true, dependent: :destroy
       t.timestamps
     end
   end
