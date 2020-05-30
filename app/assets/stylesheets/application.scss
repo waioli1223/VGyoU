@@ -1,4 +1,13 @@
+ // CSS Reset
 @import "reset";
-@import "posts";
+
+ // CSS FontAwesome
 @import "font-awesome-sprockets";
 @import "font-awesome";
+
+// Main
+@import "devise/registrations/new";
+@import "devise/sessions/new";
+@import "posts/index";
+
+
