@@ -29,11 +29,9 @@ Things you may want to cover:
 |Column|Type|Options|
 |------|----|-------|
 |family_name|string|null: false|
-|middle_name|string||
 |first_name|string|null: false|
-|family_name_original|string|null: false|
-|middle_name_original|string||
-|first_name_original|string|null: false|
+|family_name_alphabet|string|null: false|
+|first_name_alphabet|string|null: false|
 |nickname|string|null: false|
 |e-mail|string|null: false, unique: true|
 |password|string|null: false|

@@ -1,21 +1,47 @@
-%h2 Sign up
-= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+%h2 新規会員登録
+= form_with model: @user, url: user_registration_path, local: true do |f|
   = render "devise/shared/error_messages", resource: resource
   .field
-    = f.label :email
+    = f.label :メールアドレス
     %br/
     = f.email_field :email, autofocus: true, autocomplete: "email"
+
   .field
-    = f.label :password
+    = f.label :パスワード
     - if @minimum_password_length
       %em
-        (#{@minimum_password_length} characters minimum)
+        (#{@minimum_password_length} 文字以上 *英字と数字の両方を含めて設定して下さい)
     %br/
-    = f.password_field :password, autocomplete: "new-password"
+    = f.password_field :encrypted_password, autocomplete: "new-password"
+
   .field
-    = f.label :password_confirmation
+    = f.label :確認用パスワード
     %br/
     = f.password_field :password_confirmation, autocomplete: "new-password"
-  .actions
-    = f.submit "Sign up"
+
+  .field
+    = f.label :名前
+    = f.text_field :family_name, autocomplete: "family_name", placeholder:"※ 山田", class:""
+    = f.text_field :first_name, autocomplete: "first_name", placeholder:"※ 太郎", class:""
+    %br/
+
+  .field
+    = f.label :名前（ローマ字）
+    = f.text_field :family_name_alphabet, autocomplete: "family_name", placeholder:"※ Yamada", class:""
+    = f.text_field :first_name_alphabet, autocomplete: "first_name", placeholder:"※ Taro", class:""
+    %br/
+
+  .field
+    = f.label :ニックネーム（アカウント名）
+    = f.text_field :nickname, autocomplete: "nickname", placeholder:"※ ニックネーム", class:""
+    %br/
+  
+  .field
+    = f.label :生年月日, class:""
+    %br/
+    != sprintf(f.date_select(:birthday, prompt:"--", use_month_numbers:true, start_year:Time.now.year, end_year:1900, date_separator:'%s'),'年','月')+'日'
+
+  .action
+    = f.submit "登録する"
+
 = render "devise/shared/links"

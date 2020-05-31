@@ -5,13 +5,13 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
     create_table :users do |t|
       ## Database authenticatable
       t.string :email,                   null: false, unique: true, default: ""
-      t.string :password,                null: false, default: ""
+      t.string :encrypted_password,                null: false, default: "", format: /\A[a-zA-Z0-9]+\z/
       t.string :family_name,             null: false
-      t.string :middle_name
+      # t.string :middle_name
       t.string :first_name,              null: false
-      t.string :family_name_original,    null: false
-      t.string :middle_name_original
-      t.string :first_name_original,     null: false
+      t.string :family_name_alphabet,    null: false, format: /\A[a-zA-Z]+\z/
+      # t.string :middle_name_original
+      t.string :first_name_alphabet,     null: false, format: /\A[a-zA-Z]+\z/
       t.string :nickname,                null: false
       t.date   :birthday,                null: false
 
