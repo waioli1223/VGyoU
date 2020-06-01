@@ -12,7 +12,7 @@
       %em
         (#{@minimum_password_length} 文字以上 *英字と数字の両方を含めて設定して下さい)
     %br/
-    = f.password_field :encrypted_password, autocomplete: "new-password"
+    = f.password_field :password, autocomplete: "new-password"
 
   .field
     = f.label :確認用パスワード
