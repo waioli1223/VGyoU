@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
           u.permit(:user_id, :email, :password, :password_confirmation, :family_name, :first_name, :family_name_alphabet, :first_name_alphabet, :nickname, :birthday)
       }
       devise_parameter_sanitizer.permit(:sign_in){|u|
-          u.permit(:user_id, :password, :remember_me)
+          u.permit(:user_id, :password, :nickname, :remember_me)
       }
   end
 end
