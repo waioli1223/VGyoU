@@ -5,3 +5,4 @@ class UsersController < ApplicationController
     # @nickname = user.nickname
   end
 end
+
