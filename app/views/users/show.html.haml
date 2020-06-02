@@ -1,4 +1,8 @@
 %p MyPage 
-= @user.id 
-= link_to "ログアウト", destroy_user_session_path, method: :delete
+= @user.nickname
+= @user.profile
+%br/
+= link_to "プロフィールを編集", edit_user_registration_path
+%br/
+= link_to "ログアウト", destroy_user_session_path
 
