@@ -4,6 +4,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
  
   # ↓ユーザー情報を編集する際にパスワード無しで編集可能
   protected
+ 
   def update_resource(resource, params)
     resource.update_without_password(params)
   end

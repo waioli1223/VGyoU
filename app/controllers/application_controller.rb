@@ -14,9 +14,10 @@ class ApplicationController < ActionController::Base
       }
       # アカウント編集の時にnameとprofileのストロングパラメータを追加
       devise_parameter_sanitizer.permit(:account_update){|inf|
-          inf.permit(:password, :password_confirmation, :profile)
+          inf.permit(:profile)
       }
   end
+
 
     #   private
 
