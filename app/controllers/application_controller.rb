@@ -1,21 +1,21 @@
 class ApplicationController < ActionController::Base
-  # ログイン済ユーザーのみにアクセスを許可する
-  # before_action :authenticate_user!
-  # deviseコントローラーにストロングパラメータを追加する  
-  before_action :configure_permitted_parameters, if: :devise_controller?
+
+  protect_from_forgery with: :exception  #Railsで生成されるすべてのフォームとAjaxリクエストにセキュリティトークンを自動的に含ませる。
+  before_action :authenticate_user!   # ログイン済ユーザーのみにアクセスを許可する
+  before_action :configure_permitted_parameters, if: :devise_controller?   # deviseコントローラーにストロングパラメータを追加する
 
   protected
   def configure_permitted_parameters
-      devise_parameter_sanitizer.permit(:sign_up){|inf|
-          inf.permit(:user_id, :email, :password, :password_confirmation, :family_name, :first_name, :family_name_alphabet, :first_name_alphabet, :nickname, :birthday)
-      }
-      devise_parameter_sanitizer.permit(:sign_in){|inf|
-          inf.permit(:user_id, :password, :nickname, :remember_me)
-      }
-      # アカウント編集の時にnameとprofileのストロングパラメータを追加
-      devise_parameter_sanitizer.permit(:account_update){|inf|
-          inf.permit(:profile)
-      }
+    devise_parameter_sanitizer.permit(:sign_up,){|inf|
+      inf.permit(:email, :password, :password_confirmation, :family_name, :first_name, :family_name_alphabet, :first_name_alphabet, :nickname, :birthday, :profile)
+    }
+    devise_parameter_sanitizer.permit(:sign_in){|inf|
+      inf.permit(:password, :nickname, :remember_me)
+    }
+    # アカウント編集の時にnameとprofileのストロングパラメータを追加
+    devise_parameter_sanitizer.permit(:account_update) {|inf|
+      inf.permit(:profile, :nickname)
+    } 
   end
 
 
